@@ -27,6 +27,8 @@ services:
         class: AppBundle\Consumer\EventSaveConsumer
         calls:
             - [ setEventSaveService, [ "@event_save_service" ] ]
+            - [ setSerializer, [ "@event_serializer" ] ]
+            - [ setLogger, [ "@logger" ] ]
 
     event_save_service:
         class: AppBundle\Service\EventSaveService

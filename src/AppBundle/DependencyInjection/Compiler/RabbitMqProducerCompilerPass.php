@@ -7,6 +7,12 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * Class RabbitMqProducerCompilerPass
+ *
+ * @package AppBundle\DependencyInjection\Compiler
+ * @codeCoverageIgnore
+ */
 class RabbitMqProducerCompilerPass implements CompilerPassInterface
 {
     /**

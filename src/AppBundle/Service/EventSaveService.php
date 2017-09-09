@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Dto\EventDto;
 use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,12 +20,12 @@ class EventSaveService implements EventSaveInterface
     private $logger;
 
     /**
-     * @param array $message
+     * @param EventDto $eventDto
      *
      * @throws \InvalidArgumentException
      * @throws ORMException
      */
-    public function saveEvent(array $message)
+    public function saveEvent(EventDto $eventDto)
     {
         // TODO: Implement saveEvent() method.
     }

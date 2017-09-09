@@ -2,15 +2,16 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Dto\EventDto;
 use Doctrine\ORM\ORMException;
 
 interface EventSaveInterface
 {
     /**
-     * @param array $message
+     * @param EventDto $eventDto
      *
      * @throws \InvalidArgumentException
      * @throws ORMException
      */
-    public function saveEvent(array $message);
+    public function saveEvent(EventDto $eventDto);
 }

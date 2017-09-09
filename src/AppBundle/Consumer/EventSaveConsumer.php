@@ -2,9 +2,13 @@
 
 namespace AppBundle\Consumer;
 
+use AppBundle\Dto\EventDto;
 use AppBundle\Service\EventSaveInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class EventSaveConsumer implements ConsumerInterface
 {
@@ -14,15 +18,36 @@ class EventSaveConsumer implements ConsumerInterface
     private $eventSaveService;
 
     /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @param AMQPMessage $msg The message
      *
      * @return mixed false to reject and requeue, any other value to acknowledge
      */
     public function execute(AMQPMessage $msg)
     {
-        // decode message into dto
-        // call event service with dto
-        // return action
+        try {
+            /** @var EventDto $eventDto */
+            $eventDto = $this->serializer->deserialize(
+                $msg->body,
+                EventDto::class,
+                JsonEncoder::FORMAT
+            );
+
+            $this->eventSaveService->saveEvent($eventDto);
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage(), ['message' => $msg->body]);
+
+            return self::MSG_REJECT;
+        }
 
         return self::MSG_ACK;
     }
@@ -33,5 +58,21 @@ class EventSaveConsumer implements ConsumerInterface
     public function setEventSaveService($eventSaveService)
     {
         $this->eventSaveService = $eventSaveService;
+    }
+
+    /**
+     * @param SerializerInterface $serializer
+     */
+    public function setSerializer($serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }
