@@ -45,7 +45,7 @@ class HerokuConfig
         $io->write(sprintf('DATABASE_PASSWORD=%s', $config['pass']));
 
         putenv(sprintf('DATABASE_NAME=%s', ltrim('/', $config['path'])));
-        $io->write(sprintf('DATABASE_NAME=%s', ltrim('/', $config['path'])));
+        $io->write(sprintf('DATABASE_NAME=%s', ltrim($config['path'], '/')));
     }
 
     /**
@@ -78,6 +78,6 @@ class HerokuConfig
         $io->write(sprintf('AMQP_PASSWORD=%s', $config['pass']));
 
         putenv(sprintf('AMQP_VHOST=%s', ltrim('/', $config['path'])));
-        $io->write(sprintf('AMQP_VHOST=%s', ltrim('/', $config['path'])));
+        $io->write(sprintf('AMQP_VHOST=%s', ltrim($config['path'], '/')));
     }
 }
