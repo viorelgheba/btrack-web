@@ -2,7 +2,9 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Dto\BeaconDto;
 use AppBundle\Dto\EventDto;
+use AppBundle\Service\Localization\LocalizationFactory;
 use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -20,6 +22,11 @@ class EventSaveService implements EventSaveInterface
     private $logger;
 
     /**
+     * @var LocalizationFactory
+     */
+    private $localizationFactory;
+
+    /**
      * @param EventDto $eventDto
      *
      * @throws \InvalidArgumentException
@@ -27,7 +34,32 @@ class EventSaveService implements EventSaveInterface
      */
     public function saveEvent(EventDto $eventDto)
     {
-        // TODO: Implement saveEvent() method.
+        if (empty($eventDto->getBeacons())) {
+            return;
+        }
+
+        $beacons = $this->sortBeaconsByStrength($eventDto->getBeacons());
+
+        $localization = $this->localizationFactory->create($beacons);
+        $localization->handleLocalization($beacons);
+    }
+
+    /**
+     * @param BeaconDto[] $beacons
+     * @return BeaconDto[]
+     */
+    public function sortBeaconsByStrength(array $beacons)
+    {
+        return usort($beacons, "cmp_beacons");
+    }
+
+    static function cmp_beacons(BeaconDto $beaconDto1, BeaconDto $beaconDto2)
+    {
+        if ($beaconDto1->getSignalStrength() == $beaconDto2->getSignalStrength()) {
+            return 0;
+        }
+
+        return ($beaconDto1->getSignalStrength() < $beaconDto2->getSignalStrength()) ? -1 : 1;
     }
 
     /**

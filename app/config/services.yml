@@ -35,3 +35,22 @@ services:
         calls:
             - [ setDoctrine, [ "@doctrine" ] ]
             - [ setLogger, [ "@logger" ] ]
+
+    app_localization_abstract:
+        class: AppBundle\Service\Localization\AbstractLocalizationService
+
+    app_localization_mono:
+        class: AppBundle\Service\Localization\MonoLocalization
+
+    app_localization_dual:
+        class: AppBundle\Service\Localization\DualLocalization
+
+    app_localization_triple:
+        class: AppBundle\Service\Localization\TripleLocalization
+
+    app_localization_factory:
+        class: AppBundle\Service\Localization\LocalizationFactory
+        calls:
+            - [ addLocalization, [ "@app_localization_mono" ] ]
+            - [ addLocalization, [ "@app_localization_dual" ] ]
+            - [ addLocalization, [ "@app_localization_triple" ] ]
