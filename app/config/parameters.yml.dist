@@ -18,5 +18,6 @@ parameters:
     amqp_port: 5672
     amqp_user: rabbitmq
     amqp_password: rabbitmq
+    amqp_vhost: /
     amqp_connection_timeout: 3
     amqp_read_write_timeout: 3
