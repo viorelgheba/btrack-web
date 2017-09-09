@@ -13,14 +13,14 @@ old_sound_rabbit_mq:
             heartbeat:          0
 
     producers:
-        event:
+        event.save:
             connection:         btracker
-            exchange_options:   {name: 'event', type: fanout}
+            exchange_options:   {name: 'event.save', type: fanout}
 
     consumers:
-        event:
+        event.save:
             connection:         btracker
-            exchange_options:   {name: 'event', type: fanout}
-            queue_options:      {name: 'event', arguments: {'x-ha-policy': ['S', 'all']}}
+            exchange_options:   {name: 'event.save', type: fanout}
+            queue_options:      {name: 'event.save', arguments: {'x-ha-policy': ['S', 'all']}}
             qos_options:        {prefetch_size: 0, prefetch_count: 1, global: false}
             callback:           event_save_consumer

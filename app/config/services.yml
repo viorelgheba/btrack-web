@@ -1,4 +1,28 @@
 services:
+    # serializer encoders
+    json_encoder:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+
+    # serializer normalizers
+    event_normalizer:
+        class: AppBundle\Serializer\Normalizer\EventNormalizer
+
+    beacon_normalizer:
+        class: AppBundle\Serializer\Normalizer\BeaconNormalizer
+
+    array_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+
+    # serializers
+    event_serializer:
+        class: Symfony\Component\Serializer\Serializer
+        arguments: [ [ "@event_normalizer", "@beacon_normalizer", "@array_normalizer" ], [ "@json_encoder" ] ]
+
+    rabbitmq_publisher:
+        class: AppBundle\Service\RabbitMqPublisher
+        calls:
+            - [ setEncoder, [ "@json_encoder" ] ]
+
     event_save_consumer:
         class: AppBundle\Consumer\EventSaveConsumer
         calls:
