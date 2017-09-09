@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
  * Beacon
  *
  * @ORM\Table(name="beacon", indexes={@ORM\Index(name="idx_uuid", columns={"uuid"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BeaconRepository")
  */
 class Beacon
 {
