@@ -49,7 +49,7 @@ services:
       - "8080:80"
 
   rabbit:
-    image: "rabbitmq:management"
+    image: "rabbitmq:3.6-management"
     environment:
       RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
       RABBITMQ_DEFAULT_USER: "rabbitmq"
