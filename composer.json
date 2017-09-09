@@ -34,12 +34,12 @@
         "twig/twig": "^1.0||^2.0",
         "php-amqplib/rabbitmq-bundle": "^1.13",
         "ramsey/uuid": "^3.0",
-        "ramsey/uuid-doctrine": "^1.2",
-        "heroku/heroku-buildpack-php": "v124"
+        "ramsey/uuid-doctrine": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "heroku/heroku-buildpack-php": "v124"
     },
     "scripts": {
         "pre-install-cmd": [
