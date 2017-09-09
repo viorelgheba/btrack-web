@@ -87,7 +87,6 @@
                 "amqp_user": "AMQP_USER",
                 "amqp_password": "AMQP_PASSWORD",
                 "amqp_vhost": "AMQP_VHOST"
-
             }
         },
         "branch-alias": {
