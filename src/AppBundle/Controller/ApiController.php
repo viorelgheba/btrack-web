@@ -6,15 +6,17 @@ use AppBundle\Service\RabbitMqPublisher;
 use AppBundle\Service\RabbitMqPublisherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller
 {
     /**
-     * @var Request $request
-     *
      * @Route("/api/event", methods={"POST"})
+     *
+     * @var Request $request
+     * @return Response
      */
     public function saveEventAction(Request $request)
     {
@@ -24,5 +26,15 @@ class ApiController extends Controller
         $rabbitMqPublisher->publish('event.save', $request->getContent());
 
         return Response::create();
+    }
+
+    /**
+     * @Route("/api/params", methods={"GET"})
+     *
+     * @return JsonResponse
+     */
+    public function parametersAction()
+    {
+        return JsonResponse::create($this->get('service_container')->getParameterBag()->all());
     }
 }
