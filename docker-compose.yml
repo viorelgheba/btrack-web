@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    environment:
+      # Change to prod in production
+      - SYMFONY_ENV=dev
+    volumes:
+      # Comment out the next line in production
+      - ./:/srv/btracker-web:rw
+      # This is for assets:install
+      - ./web:/srv/btracker-web/web:rw
+      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
+      - /srv/btracker-web/var/
+      - /srv/btracker-web/var/cache/
+      - /srv/btracker-web/var/logs/
+      - /srv/btracker-web/var/sessions/
+      - /srv/btracker-web/vendor/
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: ./Dockerfile
+    environment:
+      - MYSQL_DATABASE=btracker
+      # You should definitely change the password in production
+      - MYSQL_PASSWORD=btracker
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_USER=btracker
+    volumes:
+      - db-data:/var/lib/mysql:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/mysql:rw
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: ./Dockerfile
+    volumes:
+      # Comment out the next line in production
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./web:/srv/btracker-web/web:ro
+    ports:
+      - "8080:80"
+
+  rabbit:
+    image: "rabbitmq:management"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+volumes:
+  app-web: {}
+  db-data: {}
