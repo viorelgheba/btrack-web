@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Beacon
@@ -15,7 +16,7 @@ class Beacon
     /**
      * @var string
      *
-     * @ORM\Column(name="uuid", type="string", length=255, nullable=false)
+     * @ORM\Column(name="uuid", type="uuid_binary", length=16, nullable=false)
      */
     private $uuid;
 
@@ -50,7 +51,7 @@ class Beacon
     private $id;
 
     /**
-     * @return string
+     * @return Uuid
      */
     public function getUuid()
     {
@@ -58,7 +59,7 @@ class Beacon
     }
 
     /**
-     * @param string $uuid
+     * @param Uuid $uuid
      */
     public function setUuid($uuid)
     {

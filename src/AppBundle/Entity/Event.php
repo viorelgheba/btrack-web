@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Event
@@ -15,16 +17,27 @@ class Event
     /**
      * @var integer
      *
-     * @ORM\Column(name="customer_id", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $customerId;
+    private $id;
 
     /**
-     * @var integer
+     * @var Customer
      *
-     * @ORM\Column(name="showroom_id", type="integer", nullable=false)
+     * @ManyToOne(targetEntity="Customer")
+     * @JoinColumn(name="customer_id", referencedColumnName="id")
      */
-    private $showroomId;
+    private $customer;
+
+    /**
+     * @var Showroom
+     *
+     * @ManyToOne(targetEntity="Showroom")
+     * @JoinColumn(name="showroom_id", referencedColumnName="id")
+     */
+    private $showroom;
 
     /**
      * @var \DateTime
@@ -53,47 +66,6 @@ class Event
      * @ORM\Column(name="status", type="boolean", nullable=false)
      */
     private $status = '1';
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
-
-    /**
-     * @return int
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
-    }
-
-    /**
-     * @param int $customerId
-     */
-    public function setCustomerId($customerId)
-    {
-        $this->customerId = $customerId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getShowroomId()
-    {
-        return $this->showroomId;
-    }
-
-    /**
-     * @param int $showroomId
-     */
-    public function setShowroomId($showroomId)
-    {
-        $this->showroomId = $showroomId;
-    }
 
     /**
      * @return \DateTime
@@ -173,6 +145,46 @@ class Event
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer $customer
+     *
+     * @return $this
+     */
+    public function setCustomer(Customer $customer)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShowroom()
+    {
+        return $this->showroom;
+    }
+
+    /**
+     * @param Showroom $showroom
+     *
+     * @return $this
+     */
+    public function setShowroom(Showroom $showroom)
+    {
+        $this->showroom = $showroom;
+
+        return $this;
     }
 }
 

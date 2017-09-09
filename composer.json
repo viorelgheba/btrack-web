@@ -32,7 +32,9 @@
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^2.0",
-        "php-amqplib/rabbitmq-bundle": "^1.13"
+        "php-amqplib/rabbitmq-bundle": "^1.13",
+        "ramsey/uuid": "^3.0",
+        "ramsey/uuid-doctrine": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

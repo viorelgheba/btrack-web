@@ -8,9 +8,12 @@ doctrine:
         password: '%database_password%'
         charset: UTF8
         server_version: 5.7
+        types:
+           uuid_binary:  Ramsey\Uuid\Doctrine\UuidBinaryType
         mapping_types:
             bit: boolean
             enum: string
+            uuid_binary: binary
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
