@@ -1,7 +1,16 @@
 old_sound_rabbit_mq:
     connections:
         btracker:
-            url: '%amqp_url%'
+            host:               '%amqp_host%'
+            port:               '%amqp_port%'
+            user:               '%amqp_user%'
+            password:           '%amqp_password%'
+            vhost:              '%amqp_vhost%'
+            lazy:               true
+            connection_timeout: '%amqp_connection_timeout%'
+            read_write_timeout: '%amqp_read_write_timeout%'
+            keepalive:          false
+            heartbeat:          0
 
     producers:
         event.save:
