@@ -14,7 +14,7 @@ class ApiController extends Controller
     /**
      * @var Request $request
      *
-     * @Route("/api/event", methods={GET,POST})
+     * @Route("/api/event", methods={"POST"})
      */
     public function saveEventAction(Request $request)
     {
