@@ -62,13 +62,13 @@ class TripleLocalization extends AbstractLocalizationService
             * (
                 (pow($b2->getX(), 2) - pow($b1->getX(), 2))
                 + (pow($b2->getY(), 2) - pow($b1->getY(), 2))
-                + (pow($b1->getSignalStrength(), 2) - pow($b2->getSignalStrength(), 2))
+                /*+ (pow($b1->getSignalStrength(), 2) - pow($b2->getSignalStrength(), 2))*/
             )
             - ($b1->getX() - $b2->getX())
             * (
                 (pow($b3->getX(), 2) - pow($b2->getX(), 2))
                 + (pow($b3->getY(), 2) - pow($b2->getY(), 2))
-                + (pow($b2->getSignalStrength(), 2) - pow($b3->getSignalStrength(), 2))
+                /*+ (pow($b2->getSignalStrength(), 2) - pow($b3->getSignalStrength(), 2))*/
             )
             / (
                 2
@@ -81,13 +81,13 @@ class TripleLocalization extends AbstractLocalizationService
             * (
                 (pow($b2->getY(), 2) - pow($b1->getY(), 2))
                 + (pow($b2->getX(), 2) - pow($b1->getX(), 2))
-                + (pow($b1->getSignalStrength(), 2) - pow($b2->getSignalStrength(), 2))
+                /*+ (pow($b1->getSignalStrength(), 2) - pow($b2->getSignalStrength(), 2))*/
             )
             - ($b1->getY() - $b2->getY())
             * (
                 (pow($b3->getY(), 2) - pow($b2->getY(), 2))
                 + (pow($b3->getX(), 2) - pow($b2->getX(), 2))
-                + (pow($b2->getSignalStrength(), 2) - pow($b3->getSignalStrength(), 2))
+                /*+ (pow($b2->getSignalStrength(), 2) - pow($b3->getSignalStrength(), 2))*/
             )
             / (
                 2
