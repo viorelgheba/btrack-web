@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Event
@@ -26,16 +24,16 @@ class Event
     /**
      * @var Customer
      *
-     * @ManyToOne(targetEntity="Customer")
-     * @JoinColumn(name="customer_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;
 
     /**
      * @var Showroom
      *
-     * @ManyToOne(targetEntity="Showroom")
-     * @JoinColumn(name="showroom_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Showroom", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="showroom_id", referencedColumnName="id")
      */
     private $showroom;
 
