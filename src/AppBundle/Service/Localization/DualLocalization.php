@@ -10,8 +10,8 @@ use AppBundle\Repository\BeaconRepository;
 class DualLocalization extends AbstractLocalizationService
 {
     const ID = 'app_localization_dual';
-    const DUAL_SIGNAL_LOCALIZATION = 2;
     const NAME = 'localization_dual';
+    const DUAL_SIGNAL_LOCALIZATION = 2;
 
     /**
      * @param BeaconDto[] $beacons
@@ -25,20 +25,14 @@ class DualLocalization extends AbstractLocalizationService
     /**
      * returns client location
      *
+     * @param EventDto $eventDto
+     * @param Beacon[] $beacons
+     *
      * @return array
      */
-    public function handleLocalization()
+    public function handleLocalization(EventDto $eventDto, $beacons)
     {
-        /** @var BeaconRepository $beaconRepository */
-        $beaconRepository = $this->getDoctrine()->getRepository('AppBundle:Beacon');
-        /** @var Beacon $beacon */
-        $beacon = $beaconRepository->findOneBy(
-            array (
-                'uuid' => $this->getEventDto()->getBeacons()[0]->getUuid()
-            )
-        );
-
-        $this->generateNewEvent($this->getEventDto(), $beacon);
+        $this->generateNewEvent($eventDto, $beacons[0]);
     }
 
     /**

@@ -4,6 +4,8 @@ namespace AppBundle\Service;
 
 use AppBundle\Dto\BeaconDto;
 use AppBundle\Dto\EventDto;
+use AppBundle\Entity\Beacon;
+use AppBundle\Repository\BeaconRepository;
 use AppBundle\Service\Localization\LocalizationFactory;
 use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
@@ -38,13 +40,55 @@ class EventSaveService implements EventSaveInterface
             return;
         }
 
-        if (count($eventDto->getBeacons()) > 1) {
-            $beacons = $this->sortBeaconsByStrength($eventDto->getBeacons());
-            $eventDto->setBeacons($beacons);
+        /** @var BeaconRepository $beaconRepository */
+        $beaconRepository = $this->doctrine->getRepository('AppBundle:Beacon');
+
+        $beacons = $beaconRepository->findByUuid(
+            array_map(
+                function (BeaconDto $b) {
+                    return $b->getUuid();
+                },
+                $eventDto->getBeacons()
+            )
+        );
+
+        if (empty($beacons)) {
+            return;
         }
 
-        $localization = $this->localizationFactory->create($eventDto);
-        $localization->handleLocalization();
+        $uuids = array_map(
+            function (Beacon $b) {
+                return $b->getUuid();
+            },
+            $beacons
+        );
+
+        $eventDto->setBeacons(
+            array_values(
+                array_filter(
+                    $eventDto->getBeacons(),
+                    function (BeaconDto $b) use ($uuids) {
+                        return in_array($b->getUuid(), $uuids);
+                    }
+                )
+            )
+        );
+
+        if (count($eventDto->getBeacons()) > 1) {
+            usort(
+                $eventDto->getBeacons(),
+                function (BeaconDto $beaconDto1, BeaconDto $beaconDto2) {
+                    if ($beaconDto1->getSignalStrength() == $beaconDto2->getSignalStrength()) {
+                        return 0;
+                    }
+
+                    return ($beaconDto1->getSignalStrength() > $beaconDto2->getSignalStrength()) ? -1 : 1;
+                }
+            );
+        }
+
+        $this->localizationFactory->create($eventDto)
+            ->handleLocalization($eventDto, $beacons);
 
         $this->doctrine->getManager()->flush();
     }
@@ -78,8 +122,6 @@ class EventSaveService implements EventSaveInterface
     public function setDoctrine($doctrine)
     {
         $this->doctrine = $doctrine;
-
-        return $this;
     }
 
     /**
@@ -90,8 +132,6 @@ class EventSaveService implements EventSaveInterface
     public function setLogger($logger)
     {
         $this->logger = $logger;
-
-        return $this;
     }
 
     /**
@@ -102,7 +142,5 @@ class EventSaveService implements EventSaveInterface
     public function setLocalizationFactory($localizationFactory)
     {
         $this->localizationFactory = $localizationFactory;
-
-        return $this;
     }
 }

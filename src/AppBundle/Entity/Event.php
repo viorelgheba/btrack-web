@@ -77,6 +77,34 @@ class Event
     private $status = self::STATUS_ACTIVE;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return Showroom
+     */
+    public function getShowroom()
+    {
+        return $this->showroom;
+    }
+
+    /**
+     * @param Showroom $showroom
+     *
+     * @return Event
+     */
+    public function setShowroom(Showroom $showroom): Event
+    {
+        $this->showroom = $showroom;
+
+        return $this;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getEventDatetime()
@@ -86,45 +114,53 @@ class Event
 
     /**
      * @param \DateTime $eventDatetime
-     */
-    public function setEventDatetime($eventDatetime)
-    {
-        $this->eventDatetime = $eventDatetime;
-    }
-
-    /**
-     * @return float
-     */
-    public function getPositionOx(): float
-    {
-        return $this->positionOx;
-    }
-
-    /**
-     * @param float $positionOx
+     *
      * @return Event
      */
-    public function setPositionOx(float $positionOx): Event
+    public function setEventDatetime(\DateTime $eventDatetime): Event
     {
-        $this->positionOx = $positionOx;
+        $this->eventDatetime = $eventDatetime;
+
         return $this;
     }
 
     /**
      * @return float
      */
-    public function getPositionOy(): float
+    public function getPositionOx()
+    {
+        return $this->positionOx;
+    }
+
+    /**
+     * @param float $positionOx
+     *
+     * @return Event
+     */
+    public function setPositionOx(float $positionOx): Event
+    {
+        $this->positionOx = $positionOx;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPositionOy()
     {
         return $this->positionOy;
     }
 
     /**
      * @param float $positionOy
+     *
      * @return Event
      */
     public function setPositionOy(float $positionOy): Event
     {
         $this->positionOy = $positionOy;
+
         return $this;
     }
 
@@ -138,10 +174,14 @@ class Event
 
     /**
      * @param \DateTime $created
+     *
+     * @return Event
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created): Event
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
@@ -154,60 +194,32 @@ class Event
 
     /**
      * @param \DateTime $modified
+     *
+     * @return Event
      */
-    public function setModified($modified)
+    public function setModified(\DateTime $modified): Event
     {
         $this->modified = $modified;
-    }
 
-    /**
-     * @return boolean
-     */
-    public function isStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param boolean $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getStatus()
     {
-        return $this->id;
+        return $this->status;
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getShowroom()
-    {
-        return $this->showroom;
-    }
-
-    /**
-     * @param Showroom $showroom
+     * @param int $status
      *
-     * @return $this
+     * @return Event
      */
-    public function setShowroom(Showroom $showroom)
+    public function setStatus(int $status): Event
     {
-        $this->showroom = $showroom;
+        $this->status = $status;
 
         return $this;
     }

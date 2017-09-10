@@ -17,31 +17,23 @@ abstract class AbstractLocalizationService implements LocalizationInterface
     protected $doctrine;
 
     /**
-     * @var EventDto
+     * @param EventDto $eventDto
+     * @param Beacon   $beacon
      */
-    protected $eventDto;
-
     protected function generateNewEvent(EventDto $eventDto, Beacon $beacon)
     {
         /** @var EntityManager $em */
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->doctrine->getManager();
 
         $event = new Event();
-        $event->setShowroom($beacon->getShowroom());
-        $event->setCreated(new \DateTime('now'));
-        $event->setEventDatetime($eventDto->getTimestamp());
-        $event->setPositionOx($beacon->getPositionOx());
-        $event->setPositionOy($beacon->getPositionOy());
+
+        $event->setShowroom($beacon->getShowroom())
+            ->setCreated(new \DateTime('now'))
+            ->setEventDatetime($eventDto->getTimestamp())
+            ->setPositionOx($beacon->getPositionOx())
+            ->setPositionOy($beacon->getPositionOy());
 
         $em->persist($event);
-    }
-
-    /**
-     * @return Registry
-     */
-    public function getDoctrine()
-    {
-        return $this->doctrine;
     }
 
     /**
@@ -51,24 +43,5 @@ abstract class AbstractLocalizationService implements LocalizationInterface
     public function setDoctrine($doctrine)
     {
         $this->doctrine = $doctrine;
-        return $this;
-    }
-
-    /**
-     * @return EventDto
-     */
-    public function getEventDto(): EventDto
-    {
-        return $this->eventDto;
-    }
-
-    /**
-     * @param EventDto $eventDto
-     * @return AbstractLocalizationService
-     */
-    public function setEventDto(EventDto $eventDto): AbstractLocalizationService
-    {
-        $this->eventDto = $eventDto;
-        return $this;
     }
 }

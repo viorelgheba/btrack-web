@@ -23,25 +23,17 @@ class MonoLocalization extends AbstractLocalizationService
         return count($beacons) == self::MONO_SIGNAL_LOCALIZATION;
     }
 
-    public function handleLocalization()
+    /**
+     * returns client location
+     *
+     * @param EventDto $eventDto
+     * @param Beacon[] $beacons
+     *
+     * @return array
+     */
+    public function handleLocalization(EventDto $eventDto, $beacons)
     {
-        /** @var BeaconRepository $beaconRepository */
-        $beaconRepository = $this->getDoctrine()->getRepository('AppBundle:Beacon');
-
-        /** @var Beacon $beacon */
-        foreach ($this->getEventDto()->getBeacons() as $foundBeacon) {
-            $beacon = $beaconRepository->findOneBy(
-                array(
-                    'uuid' => $foundBeacon->getUuid(),
-                )
-            );
-
-            if (null === $beacon) {
-                continue;
-            }
-
-            $this->generateNewEvent($this->getEventDto(), $beacon);
-        }
+        $this->generateNewEvent($eventDto, $beacons[0]);
     }
 
     /**

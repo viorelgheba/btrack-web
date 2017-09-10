@@ -3,6 +3,8 @@
 namespace AppBundle\Service\Localization;
 
 use AppBundle\Dto\BeaconDto;
+use AppBundle\Dto\EventDto;
+use AppBundle\Entity\Beacon;
 
 interface LocalizationInterface
 {
@@ -15,9 +17,12 @@ interface LocalizationInterface
     /**
      * returns client location
      *
+     * @param EventDto $eventDto
+     * @param Beacon[] $beacons
+     *
      * @return array
      */
-    public function handleLocalization();
+    public function handleLocalization(EventDto $eventDto, $beacons);
 
     /**
      * @return string

@@ -3,6 +3,7 @@
 namespace AppBundle\Service\Localization;
 
 use AppBundle\Dto\EventDto;
+use AppBundle\Entity\Beacon;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class LocalizationFactory
@@ -47,8 +48,9 @@ class LocalizationFactory
                 continue;
             }
 
-            $localisation->setEventDto($eventDto);
             return $localisation;
         }
+
+        throw new \InvalidArgumentException('Could not find localization strategy.');
     }
 }
