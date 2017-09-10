@@ -27,14 +27,6 @@ class Event
     private $id;
 
     /**
-     * @var Customer
-     *
-     * @ManyToOne(targetEntity="Customer")
-     * @JoinColumn(name="customer_id", referencedColumnName="id")
-     */
-    private $customer;
-
-    /**
      * @var Showroom
      *
      * @ManyToOne(targetEntity="Showroom")
@@ -198,26 +190,6 @@ class Event
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
-     * @param Customer $customer
-     *
-     * @return $this
-     */
-    public function setCustomer(Customer $customer)
-    {
-        $this->customer = $customer;
-
-        return $this;
     }
 
     /**

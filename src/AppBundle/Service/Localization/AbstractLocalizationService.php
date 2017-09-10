@@ -2,10 +2,8 @@
 
 namespace AppBundle\Service\Localization;
 
-use AppBundle\Dto\BeaconDto;
 use AppBundle\Dto\EventDto;
 use AppBundle\Entity\Beacon;
-use AppBundle\Entity\Customer;
 use AppBundle\Entity\Event;
 use AppBundle\Repository\CustomerRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -30,19 +28,8 @@ abstract class AbstractLocalizationService implements LocalizationInterface
         $em = $this->getDoctrine()->getManager();
 
         $event = new Event();
-
-        /** @var CustomerRepository $customerRepository */
-        $customerRepository = $this->getDoctrine()->getRepository('AppBundle:Customer');
-        /** @var Customer $customer */
-        $customer = $customerRepository->findOneBy(
-            array(
-                'id' => $eventDto->getClientId()
-            )
-        );
-
         $event->setShowroom($beacon->getShowroom());
         $event->setCreated(new \DateTime('now'));
-        $event->setCustomer($customer);
         $event->setEventDatetime($eventDto->getTimestamp());
         $event->setPositionOx($beacon->getPositionOx());
         $event->setPositionOy($beacon->getPositionOy());
