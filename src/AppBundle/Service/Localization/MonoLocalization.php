@@ -9,12 +9,13 @@ use AppBundle\Repository\BeaconRepository;
 
 class MonoLocalization extends AbstractLocalizationService
 {
-    const ID = 'app_localization_mono';
-    const NAME = 'localization_mono';
+    const ID                       = 'app_localization_mono';
+    const NAME                     = 'localization_mono';
     const MONO_SIGNAL_LOCALIZATION = 1;
 
     /**
      * @param BeaconDto[] $beacons
+     *
      * @return bool
      */
     public function canLocalize(array $beacons)
@@ -26,14 +27,21 @@ class MonoLocalization extends AbstractLocalizationService
     {
         /** @var BeaconRepository $beaconRepository */
         $beaconRepository = $this->getDoctrine()->getRepository('AppBundle:Beacon');
-        /** @var Beacon $beacon */
-        $beacon = $beaconRepository->findOneBy(
-            array (
-                'uuid' => $this->getEventDto()->getBeacons()[0]->getUuid()
-            )
-        );
 
-        $this->generateNewEvent($this->getEventDto(), $beacon);
+        /** @var Beacon $beacon */
+        foreach ($this->getEventDto()->getBeacons() as $foundBeacon) {
+            $beacon = $beaconRepository->findOneBy(
+                array(
+                    'uuid' => $foundBeacon->getUuid(),
+                )
+            );
+
+            if (null === $beacon) {
+                continue;
+            }
+
+            $this->generateNewEvent($this->getEventDto(), $beacon);
+        }
     }
 
     /**
