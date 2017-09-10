@@ -35,8 +35,8 @@ class HerokuConfig
         putenv(sprintf('DATABASE_HOST=%s', $config['host']));
         $io->write(sprintf('DATABASE_HOST=%s', $config['host']));
 
-        putenv(sprintf('DATABASE_PORT=%s', $config['port']));
-        $io->write(sprintf('DATABASE_PORT=%s', $config['port']));
+        putenv(sprintf('DATABASE_PORT=%d', isset($config['port']) ? $config['port'] : 3306)));
+        $io->write(sprintf('DATABASE_PORT=%d', isset($config['port']) ? $config['port'] : 3306)));
 
         putenv(sprintf('DATABASE_USER=%s', $config['user']));
         $io->write(sprintf('DATABASE_USER=%s', $config['user']));
@@ -44,8 +44,8 @@ class HerokuConfig
         putenv(sprintf('DATABASE_PASSWORD=%s', $config['pass']));
         $io->write(sprintf('DATABASE_PASSWORD=%s', $config['pass']));
 
-        putenv(sprintf('DATABASE_NAME=%s', ltrim('/', $config['path'])));
-        $io->write(sprintf('DATABASE_NAME=%s', ltrim($config['path'], '/')));
+        putenv(sprintf('DATABASE_NAME=%s', substr($config['path'], 1) ?: '/'));
+        $io->write(sprintf('DATABASE_NAME=%s', substr($config['path'], 1) ?: '/'));
     }
 
     /**
@@ -68,8 +68,8 @@ class HerokuConfig
         putenv(sprintf('AMQP_HOST=%s', $config['host']));
         $io->write(sprintf('AMQP_HOST=%s', $config['host']));
 
-        putenv(sprintf('AMQP_PORT=%s', $config['port']));
-        $io->write(sprintf('AMQP_PORT=%s', $config['port']));
+        putenv(sprintf('AMQP_PORT=%d', isset($config['port']) ? $config['port'] : 5672));
+        $io->write(sprintf('AMQP_PORT=%d', isset($config['port']) ? $config['port'] : 5672));
 
         putenv(sprintf('AMQP_USER=%s', $config['user']));
         $io->write(sprintf('AMQP_USER=%s', $config['user']));
@@ -77,7 +77,7 @@ class HerokuConfig
         putenv(sprintf('AMQP_PASSWORD=%s', $config['pass']));
         $io->write(sprintf('AMQP_PASSWORD=%s', $config['pass']));
 
-        putenv(sprintf('AMQP_VHOST=%s', ltrim('/', $config['path'])));
-        $io->write(sprintf('AMQP_VHOST=%s', ltrim($config['path'], '/')));
+        putenv(sprintf('AMQP_VHOST=%s', substr($config['path'], 1) ?: '/'));
+        $io->write(sprintf('AMQP_VHOST=%s', substr($config['path'], 1) ?: '/'));
     }
 }
