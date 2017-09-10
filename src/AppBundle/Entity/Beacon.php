@@ -23,14 +23,14 @@ class Beacon
     /**
      * @var float
      *
-     * @ORM\Column(name="position_Ox", type="float", nullable="false")
+     * @ORM\Column(name="position_Ox", type="float", nullable=false)
      */
     private $positionOx;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="position_Oy", type="float", nullable="false")
+     * @ORM\Column(name="position_Oy", type="float", nullable=false)
      */
     private $positionOy;
 
