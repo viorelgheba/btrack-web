@@ -21,7 +21,6 @@ abstract class AbstractLocalizationService implements LocalizationInterface
      */
     protected $eventDto;
 
-
     protected function generateNewEvent(EventDto $eventDto, Beacon $beacon)
     {
         /** @var EntityManager $em */

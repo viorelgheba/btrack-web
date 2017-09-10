@@ -41,6 +41,8 @@ class EventSaveConsumer implements ConsumerInterface
      */
     public function execute(AMQPMessage $msg)
     {
+        $this->logger->info($msg->body);
+
         try {
             /** @var EventDto $eventDto */
             $eventDto = $this->serializer->deserialize(
@@ -49,11 +51,11 @@ class EventSaveConsumer implements ConsumerInterface
                 JsonEncoder::FORMAT
             );
         } catch (InvalidArgumentException $e) {
-            $this->logger->warning($e->getMessage(), ['message' => $msg->body]);
+            $this->logger->warning($e->getMessage());
 
             return self::MSG_REJECT;
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage(), ['message' => $msg->body]);
+            $this->logger->error($e->getMessage());
 
             return self::MSG_REJECT;
         }
@@ -61,7 +63,7 @@ class EventSaveConsumer implements ConsumerInterface
         try {
             $this->eventSaveService->saveEvent($eventDto);
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage(), ['message' => $msg->body]);
+            $this->logger->error($e->getMessage());
 
             $this->doctrine->resetManager();
 
