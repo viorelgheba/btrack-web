@@ -26,10 +26,10 @@ class LocalizationFactory
     }
 
     /**
-     * @param AbstractLocalizationService $localisation
+     * @param LocalizationInterface $localisation
      * @return LocalizationFactory
      */
-    public function addLocalisation(AbstractLocalizationService $localisation): LocalizationFactory
+    public function addLocalization(LocalizationInterface $localisation): LocalizationFactory
     {
         $this->localisations->set($localisation->getName(), $localisation);
 

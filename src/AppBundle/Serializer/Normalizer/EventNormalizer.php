@@ -46,7 +46,8 @@ class EventNormalizer implements DenormalizerInterface, SerializerAwareInterface
         $object = new EventDto();
 
         $object->setBeacons($beacons)
-            ->setTimestamp(\DateTime::createFromFormat(\DateTime::ISO8601, $data['timestamp']));
+            ->setTimestamp(\DateTime::createFromFormat(\DateTime::ISO8601, $data['timestamp']))
+            ->setClientId($data['client_id']);
 
         return $object;
     }
