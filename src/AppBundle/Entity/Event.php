@@ -254,7 +254,7 @@ class Event
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getName()
     {
