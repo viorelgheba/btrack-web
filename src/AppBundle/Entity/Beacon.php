@@ -23,6 +23,13 @@ class Beacon
     private $uuid;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="position_Ox", type="float", nullable=false)
@@ -217,6 +224,26 @@ class Beacon
     public function setStatus(int $status): Beacon
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Beacon
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
 
         return $this;
     }
