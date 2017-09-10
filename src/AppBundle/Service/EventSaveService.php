@@ -56,7 +56,7 @@ class EventSaveService implements EventSaveInterface
      */
     public function sortBeaconsByStrength(array $beacons)
     {
-        return usort(
+        usort(
             $beacons,
             function (BeaconDto $beaconDto1, BeaconDto $beaconDto2) {
                 if ($beaconDto1->getSignalStrength() == $beaconDto2->getSignalStrength()) {
@@ -66,6 +66,8 @@ class EventSaveService implements EventSaveInterface
                 return ($beaconDto1->getSignalStrength() > $beaconDto2->getSignalStrength()) ? -1 : 1;
             }
         );
+
+        return $beacons;
     }
 
     /**
