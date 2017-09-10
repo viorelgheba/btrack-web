@@ -57,7 +57,7 @@ class Event
     private $positionOy;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(name="name", type="string")
      */
