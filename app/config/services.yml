@@ -16,7 +16,9 @@ services:
     # serializers
     event_serializer:
         class: Symfony\Component\Serializer\Serializer
-        arguments: [ [ "@event_normalizer", "@beacon_normalizer", "@array_normalizer" ], [ "@json_encoder" ] ]
+        arguments:
+            - [ "@event_normalizer", "@beacon_normalizer", "@array_normalizer" ]
+            - [ "@json_encoder" ]
 
     rabbitmq_publisher:
         class: AppBundle\Service\RabbitMqPublisher
