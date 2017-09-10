@@ -24,3 +24,4 @@ old_sound_rabbit_mq:
             queue_options:      {name: 'event.save', arguments: {'x-ha-policy': ['S', 'all']}}
             qos_options:        {prefetch_size: 0, prefetch_count: 1, global: false}
             callback:           event_save_consumer
+            enable_logger:      true

@@ -10,6 +10,7 @@ services:
     environment:
       # Change to prod in production
       - SYMFONY_ENV=dev
+      - SYMFONY_SECRET=ebb68f5c57dd588a770f93093253887e73ab02dd
     volumes:
       # Comment out the next line in production
       - ./:/srv/btracker-web:rw
@@ -27,7 +28,6 @@ services:
       dockerfile: ./Dockerfile
     environment:
       - MYSQL_DATABASE=btracker
-      # You should definitely change the password in production
       - MYSQL_PASSWORD=btracker
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=btracker
@@ -42,7 +42,6 @@ services:
       context: ./docker/nginx
       dockerfile: ./Dockerfile
     volumes:
-      # Comment out the next line in production
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./web:/srv/btracker-web/web:ro
     ports:
