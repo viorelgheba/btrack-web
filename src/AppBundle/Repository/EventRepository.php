@@ -15,7 +15,7 @@ class EventRepository extends EntityRepository
         return $this->createQueryBuilder('e')
             ->select('PARTIAL e.{id,positionOx,positionOy,eventDatetime}')
             ->orderBy('e.eventDatetime', 'desc')
-            ->setMaxResults(20)
+            ->setMaxResults(10)
             ->getQuery()
             ->useQueryCache(true)
             ->getResult();
