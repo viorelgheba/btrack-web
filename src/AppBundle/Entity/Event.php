@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 class Event
 {
     const STATUS_INACTIVE = 0;
-    const STATUS_ACTIVE = 1;
+    const STATUS_ACTIVE   = 1;
 
     /**
      * @var integer
@@ -55,6 +55,20 @@ class Event
      * @ORM\Column(name="position_Oy", type="float", nullable=false)
      */
     private $positionOy;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="name", type="string")
+     */
+    private $name;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="signal_strength", type="decimal")
+     */
+    private $signalStrength;
 
     /**
      * @var \DateTime
@@ -237,6 +251,46 @@ class Event
         if (null === $this->modified) {
             $this->setModified(new \DateTime('now'));
         }
+    }
+
+    /**
+     * @return float
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param float $name
+     *
+     * @return Event
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSignalStrength()
+    {
+        return $this->signalStrength;
+    }
+
+    /**
+     * @param float $signalStrength
+     *
+     * @return Event
+     */
+    public function setSignalStrength($signalStrength)
+    {
+        $this->signalStrength = $signalStrength;
+
+        return $this;
     }
 }
 
