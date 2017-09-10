@@ -40,14 +40,25 @@ class EventNormalizer implements DenormalizerInterface, SerializerAwareInterface
      */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        $object = new EventDto();
-
-        foreach ($data['beacons'] as $beacon) {
-            $serializedBeacon = $this->serializer->denormalize($beacon, BeaconDto::class, $format, $context);
-            $object->addBeacon($serializedBeacon);
+        if (!array_key_exists('beacons', $data)) {
+            throw new InvalidArgumentException('Missing event beacons key.');
         }
 
-        $object->setTimestamp(\DateTime::createFromFormat(\DateTime::ISO8601, $data['timestamp']));
+        if (!array_key_exists('timestamp', $data)) {
+            throw new InvalidArgumentException('Missing event timestamp key.');
+        }
+
+        if (empty($data['beacons'])) {
+            throw new InvalidArgumentException('Empty event beacons value.');
+        }
+
+        /** @var BeaconDto[] $beacons */
+        $beacons = $this->serializer->denormalize($data['beacons'], BeaconDto::class . '[]', $format, $context);
+
+        $object = new EventDto();
+
+        $object->setTimestamp(\DateTime::createFromFormat(\DateTime::ISO8601, $data['timestamp']))
+            ->setBeacons($beacons);
 
         return $object;
     }

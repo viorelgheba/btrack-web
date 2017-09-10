@@ -32,6 +32,26 @@ class BeaconNormalizer implements DenormalizerInterface
      */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
+        if (!array_key_exists('name', $data)) {
+            throw new InvalidArgumentException('Missing beacon name key.');
+        }
+
+        if (!array_key_exists('uuid', $data)) {
+            throw new InvalidArgumentException('Missing beacon uuid key.');
+        }
+
+        if (!array_key_exists('signal_strength', $data)) {
+            throw new InvalidArgumentException('Missing beacon signal_strength key.');
+        }
+
+        if (!array_key_exists('distance', $data)) {
+            throw new InvalidArgumentException('Missing beacon distance key.');
+        }
+
+        if (!array_key_exists('zone', $data)) {
+            throw new InvalidArgumentException('Missing beacon zone key.');
+        }
+
         $object = new BeaconDto();
 
         $object->setName($data['name'])

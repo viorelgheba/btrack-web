@@ -29,6 +29,7 @@ services:
             - [ setEventSaveService, [ "@event_save_service" ] ]
             - [ setSerializer, [ "@event_serializer" ] ]
             - [ setLogger, [ "@logger" ] ]
+            - [ setDoctrine, [ "@doctrine" ] ]
 
     event_save_service:
         class: AppBundle\Service\EventSaveService
