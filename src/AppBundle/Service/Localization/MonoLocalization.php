@@ -28,8 +28,6 @@ class MonoLocalization extends AbstractLocalizationService
      *
      * @param EventDto $eventDto
      * @param Beacon[] $beacons
-     *
-     * @return array
      */
     public function handleLocalization(EventDto $eventDto, $beacons)
     {

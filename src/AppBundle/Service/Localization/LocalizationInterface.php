@@ -19,8 +19,6 @@ interface LocalizationInterface
      *
      * @param EventDto $eventDto
      * @param Beacon[] $beacons
-     *
-     * @return array
      */
     public function handleLocalization(EventDto $eventDto, $beacons);
 

@@ -17,10 +17,12 @@ abstract class AbstractLocalizationService implements LocalizationInterface
     protected $doctrine;
 
     /**
-     * @param EventDto $eventDto
-     * @param Beacon   $beacon
+     * @param EventDto   $eventDto
+     * @param Beacon     $beacon
+     * @param float|null $x
+     * @param float|null $y
      */
-    protected function generateNewEvent(EventDto $eventDto, Beacon $beacon)
+    protected function generateNewEvent(EventDto $eventDto, Beacon $beacon, $x = null, $y = null)
     {
         /** @var EntityManager $em */
         $em = $this->doctrine->getManager();
@@ -30,8 +32,8 @@ abstract class AbstractLocalizationService implements LocalizationInterface
         $event->setShowroom($beacon->getShowroom())
             ->setCreated(new \DateTime('now'))
             ->setEventDatetime($eventDto->getTimestamp())
-            ->setPositionOx($beacon->getPositionOx())
-            ->setPositionOy($beacon->getPositionOy());
+            ->setPositionOx(null === $x ? $beacon->getPositionOx() : $x)
+            ->setPositionOy(null === $y ? $beacon->getPositionOy() : $y);
 
         $em->persist($event);
     }

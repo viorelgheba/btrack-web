@@ -35,6 +35,16 @@ class BeaconDto
     private $zone;
 
     /**
+     * @var float
+     */
+    private $x;
+
+    /**
+     * @var float
+     */
+    private $y;
+
+    /**
      * @return string
      */
     public function getName()
@@ -130,6 +140,46 @@ class BeaconDto
     public function setZone(string $zone): BeaconDto
     {
         $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getX()
+    {
+        return $this->x;
+    }
+
+    /**
+     * @param float $x
+     *
+     * @return BeaconDto
+     */
+    public function setX(float $x): BeaconDto
+    {
+        $this->x = $x;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getY()
+    {
+        return $this->y;
+    }
+
+    /**
+     * @param float $y
+     *
+     * @return BeaconDto
+     */
+    public function setY(float $y): BeaconDto
+    {
+        $this->y = $y;
 
         return $this;
     }
