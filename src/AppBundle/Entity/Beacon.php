@@ -40,7 +40,7 @@ class Beacon
     /**
      * @var Showroom
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Showroom", fetch="EXTRA_LAZY")
-     * @ORM\Column(name="showroom", referencedColumnName="id")
+     * @ORM\JoinColumn(name="showroom", referencedColumnName="id")
      */
     private $showroom;
 
