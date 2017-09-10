@@ -50,6 +50,20 @@ class Event
     private $eventDatetime;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="position_Ox", type="float", nullable=false)
+     */
+    private $positionOx;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="position_Oy", type="float", nullable=false)
+     */
+    private $positionOy;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=false)
@@ -84,6 +98,42 @@ class Event
     public function setEventDatetime($eventDatetime)
     {
         $this->eventDatetime = $eventDatetime;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPositionOx(): float
+    {
+        return $this->positionOx;
+    }
+
+    /**
+     * @param float $positionOx
+     * @return Event
+     */
+    public function setPositionOx(float $positionOx): Event
+    {
+        $this->positionOx = $positionOx;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPositionOy(): float
+    {
+        return $this->positionOy;
+    }
+
+    /**
+     * @param float $positionOy
+     * @return Event
+     */
+    public function setPositionOy(float $positionOy): Event
+    {
+        $this->positionOy = $positionOy;
+        return $this;
     }
 
     /**

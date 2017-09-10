@@ -38,6 +38,8 @@ CREATE TABLE `event` (
     `customer_id`    INT(11) UNSIGNED    NOT NULL,
     `showroom_id`    INT(11) UNSIGNED    NOT NULL,
     `event_datetime` DATETIME            NOT NULL,
+    `position_Ox` FLOAT (3,2)   NOT NULL,
+    `position_Oy` FLOAT (3,2)   NOT NULL,
     `created`        TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `modified`       TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `status`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
