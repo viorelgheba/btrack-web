@@ -5,38 +5,37 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    depends_on:
-      - db
+    volumes:
+      - ./:/srv/btracker-web:rw
+    working_dir: /srv/btracker-web
     environment:
-      # Change to prod in production
       - SYMFONY_ENV=${APP_ENV}
       - SYMFONY_SECRET=${APP_SECRET}
-    volumes:
-      # Comment out the next line in production
-      - ./:/srv/btracker-web:rw
-      # This is for assets:install
-      - ./web:/srv/btracker-web/web:rw
-      # If you develop on Linux, comment out the following volumes to just use bind-mounted project directory from host
-      - /srv/btracker-web/var/
-      - /srv/btracker-web/var/cache/
-      - /srv/btracker-web/var/logs/
-      - /srv/btracker-web/var/sessions/
-      - /srv/btracker-web/vendor/
+      - DATABASE_HOST=${DB_HOST}
+      - DATABASE_PORT=${DB_PORT}
+      - DATABASE_USER=${DB_USER}
+      - DATABASE_PASSWORD=${DB_PASSWORD}
+      - DATABASE_NAME=${DB_NAME}
+      - AMQP_HOST=${AMQP_HOST}
+      - AMQP_PORT=${AMQP_PORT}
+      - AMQP_USER=${AMQP_USER}
+      - AMQP_PASSWORD=${AMQP_PASSWORD}
+      - AMQP_VHOST=${AMQP_VHOST}
+
   db:
     build:
       context: ./docker/db
       dockerfile: ./Dockerfile
     environment:
-      - MYSQL_DATABASE=${DATABASE_NAME}
-      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_RANDOM_ROOT_PASSWORD=true
-      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_USER=${DB_USER}
     volumes:
       - db-data:/var/lib/mysql:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/mysql:rw
     ports:
-      - "${DATABASE_PORT}:3306"
+      - "${DB_PORT}:3306"
+
   nginx:
     build:
       context: ./docker/nginx
@@ -56,7 +55,7 @@ services:
       RABBITMQ_DEFAULT_VHOST: "${AMQP_VHOST}"
     ports:
       - "${AMQP_PORT}:5672"
-      - "15672:15672"
+      - "${AMQP_PORT2}:15672"
 
 volumes:
   app-web: {}
