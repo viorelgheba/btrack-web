@@ -27,6 +27,8 @@ CREATE TABLE `event` (
     `event_datetime` DATETIME            NOT NULL,
     `position_Ox` FLOAT (3,2)   NOT NULL,
     `position_Oy` FLOAT (3,2)   NOT NULL,
+    `name` VARCHAR(255) NULL,
+	   `signal_strength` DECIMAL(10,2) NULL,
     `created`        TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `modified`       TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `status`         TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',

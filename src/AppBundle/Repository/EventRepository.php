@@ -13,7 +13,6 @@ class EventRepository extends EntityRepository
     public function getLatestEvents()
     {
         return $this->createQueryBuilder('e')
-            ->select('PARTIAL e.{id,positionOx,positionOy,eventDatetime}')
             ->orderBy('e.eventDatetime', 'desc')
             ->setMaxResults(10)
             ->getQuery()

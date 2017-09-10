@@ -39,7 +39,8 @@ abstract class AbstractLocalizationService implements LocalizationInterface
             ->setCreated(new \DateTime('now'))
             ->setEventDatetime($eventDto->getTimestamp())
             ->setPositionOx(null === $x ? $beacon->getPositionOx() : $x)
-            ->setPositionOy(null === $y ? $beacon->getPositionOy() : $y);
+            ->setPositionOy(null === $y ? $beacon->getPositionOy() : $y)
+            ->setName($beacon->getName());
 
         $em->persist($event);
 

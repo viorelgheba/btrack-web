@@ -12,15 +12,17 @@
                     <thead>
                     <tr>
                         <th width="20%">#</th>
+                        <th width="20%">Device name</th>
                         <th width="20%">X</th>
                         <th width="20%">Y</th>
-                        <th width="40%">Date</th>
+                        <th width="20%">Date</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for event in events %}
                     <tr>
                         <td scope="row">{{ event.getId() }}</td>
+                        <td>{{ event.getName() }}</td>
                         <td>{{ event.getPositionOx() }}</td>
                         <td>{{ event.getPositionOy() }}</td>
                         <td>{{ event.getEventDatetime()|date('Y-m-d H:i:s') }}</td>
