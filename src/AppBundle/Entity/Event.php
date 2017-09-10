@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * Event
  *
  * @ORM\Table(name="event")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="")
  */
 class Event
 {
