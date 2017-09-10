@@ -63,7 +63,7 @@ class EventSaveConsumer implements ConsumerInterface
         try {
             $this->eventSaveService->saveEvent($eventDto);
         } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error($e->getMessage(), $e->getTrace());
 
             $this->doctrine->resetManager();
 
