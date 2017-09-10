@@ -2,6 +2,7 @@
 
 namespace AppBundle\Service\Localization;
 
+use AppBundle\Dto\EventDto;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class LocalizationFactory
@@ -36,17 +37,17 @@ class LocalizationFactory
     }
 
     /**
-     * @param array $beacons
+     * @param EventDto $eventDto
      * @return AbstractLocalizationService|mixed
      */
-    public function create(array $beacons)
+    public function create(EventDto $eventDto)
     {
         foreach ($this->localisations as $localisation) {
-            if (false === $localisation->canLocalize($beacons)) {
+            if (false === $localisation->canLocalize($eventDto->getBeacons())) {
                 continue;
             }
 
-            $localisation->setBeacons($beacons);
+            $localisation->setEventDto($eventDto);
             return $localisation;
         }
     }

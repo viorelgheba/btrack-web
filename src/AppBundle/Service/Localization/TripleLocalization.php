@@ -3,7 +3,6 @@
 namespace AppBundle\Service\Localization;
 
 use AppBundle\Dto\BeaconDto;
-use AppBundle\Dto\EventDto;
 use AppBundle\Entity\Beacon;
 use AppBundle\Repository\BeaconRepository;
 
@@ -25,10 +24,9 @@ class TripleLocalization extends AbstractLocalizationService
     /**
      * returns client location
      *
-     * @param EventDto[] $beacons
      * @return array
      */
-    public function handleLocalization(array $beacons)
+    public function handleLocalization()
     {
         /** @var BeaconRepository $beaconRepository */
         $beaconRepository = $this->getDoctrine()->getRepository('AppBundle:Beacon');
@@ -36,11 +34,11 @@ class TripleLocalization extends AbstractLocalizationService
         /** @var Beacon $beacon */
         $beacon = $beaconRepository->findOneBy(
             array (
-                'uuid' => $beacons[0]->getUuid()
+                'uuid' => $this->getEventDto()->getBeacons()[0]->getUuid()
             )
         );
 
-        return array($beacon->getPositionOx(), $beacon->getPositionOy());
+        $this->generateNewEvent($this->getEventDto(), $beacon);
     }
 
     /**

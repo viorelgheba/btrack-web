@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Customer
 {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+
     /**
      * @var integer
      *
@@ -50,11 +53,11 @@ class Customer
     private $modified = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="status", type="boolean", nullable=false)
+     * @ORM\Column(name="status", type="integer", nullable=false)
      */
-    private $status = '1';
+    private $status = self::STATUS_ACTIVE;
 
     /**
      * @return string

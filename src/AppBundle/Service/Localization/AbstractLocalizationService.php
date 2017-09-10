@@ -19,9 +19,9 @@ abstract class AbstractLocalizationService implements LocalizationInterface
     protected $doctrine;
 
     /**
-     * @var BeaconDto[]
+     * @var EventDto
      */
-    protected $beacons;
+    protected $eventDto;
 
 
     protected function generateNewEvent(EventDto $eventDto, Beacon $beacon)
@@ -67,20 +67,20 @@ abstract class AbstractLocalizationService implements LocalizationInterface
     }
 
     /**
-     * @return BeaconDto[]
+     * @return EventDto
      */
-    public function getBeacons(): array
+    public function getEventDto(): EventDto
     {
-        return $this->beacons;
+        return $this->eventDto;
     }
 
     /**
-     * @param BeaconDto[] $beacons
+     * @param EventDto $eventDto
      * @return AbstractLocalizationService
      */
-    public function setBeacons(array $beacons): AbstractLocalizationService
+    public function setEventDto(EventDto $eventDto): AbstractLocalizationService
     {
-        $this->beacons = $beacons;
+        $this->eventDto = $eventDto;
         return $this;
     }
 }

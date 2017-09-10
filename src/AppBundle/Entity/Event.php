@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Event
@@ -12,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+
     /**
      * @var integer
      *
@@ -24,16 +29,16 @@ class Event
     /**
      * @var Customer
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Customer", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Customer")
+     * @JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;
 
     /**
      * @var Showroom
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Showroom", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="showroom_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Showroom")
+     * @JoinColumn(name="showroom_id", referencedColumnName="id")
      */
     private $showroom;
 
@@ -59,11 +64,11 @@ class Event
     private $modified = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="status", type="boolean", nullable=false)
+     * @ORM\Column(name="status", type="integer", nullable=false)
      */
-    private $status = '1';
+    private $status = self::STATUS_ACTIVE;
 
     /**
      * @return \DateTime
