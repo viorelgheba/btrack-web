@@ -18,7 +18,7 @@ class DefaultController extends Controller
         return $this->render(
             'default/index.html.twig',
             [
-                'events' => $this->get('doctrine')->getRepository('AppBundle:Event'),
+                'events' => $this->get('doctrine')->getRepository('AppBundle:Event')->getLatestEvents(),
             ]
         );
     }
