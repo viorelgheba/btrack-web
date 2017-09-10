@@ -39,15 +39,21 @@ services:
 
     app_localization_abstract:
         class: AppBundle\Service\Localization\AbstractLocalizationService
+        abstract: true
+        calls:
+            - [ setDoctrine, [ "@doctrine" ] ]
 
     app_localization_mono:
         class: AppBundle\Service\Localization\MonoLocalization
+        parent: app_localization_abstract
 
     app_localization_dual:
         class: AppBundle\Service\Localization\DualLocalization
+        parent: app_localization_abstract
 
     app_localization_triple:
         class: AppBundle\Service\Localization\TripleLocalization
+        parent: app_localization_abstract
 
     app_localization_factory:
         class: AppBundle\Service\Localization\LocalizationFactory
