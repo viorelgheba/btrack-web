@@ -59,7 +59,7 @@ class EventSaveService implements EventSaveInterface
         return usort($beacons, "cmp_beacons");
     }
 
-    static function cmp_beacons(BeaconDto $beaconDto1, BeaconDto $beaconDto2)
+    function cmp_beacons(BeaconDto $beaconDto1, BeaconDto $beaconDto2)
     {
         if ($beaconDto1->getSignalStrength() == $beaconDto2->getSignalStrength()) {
             return 0;
