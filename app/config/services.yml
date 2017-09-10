@@ -35,6 +35,7 @@ services:
         calls:
             - [ setDoctrine, [ "@doctrine" ] ]
             - [ setLogger, [ "@logger" ] ]
+            - [ setLocalizationFactory, [ "@app_localization_factory" ] ]
 
     app_localization_abstract:
         class: AppBundle\Service\Localization\AbstractLocalizationService

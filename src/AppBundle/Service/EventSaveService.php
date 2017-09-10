@@ -51,6 +51,7 @@ class EventSaveService implements EventSaveInterface
 
     /**
      * @param BeaconDto[] $beacons
+     *
      * @return BeaconDto[]
      */
     public function sortBeaconsByStrength(array $beacons)
@@ -68,18 +69,38 @@ class EventSaveService implements EventSaveInterface
     }
 
     /**
-     * @param RegistryInterface $doctrine
+     * @param $doctrine
+     *
+     * @return $this
      */
     public function setDoctrine($doctrine)
     {
         $this->doctrine = $doctrine;
+
+        return $this;
     }
 
     /**
-     * @param LoggerInterface $logger
+     * @param $logger
+     *
+     * @return $this
      */
     public function setLogger($logger)
     {
         $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * @param LocalizationFactory $localizationFactory
+     *
+     * @return EventSaveService
+     */
+    public function setLocalizationFactory($localizationFactory)
+    {
+        $this->localizationFactory = $localizationFactory;
+
+        return $this;
     }
 }
