@@ -19,21 +19,21 @@ class Beacon
     /**
      * @var Uuid
      *
-     * @ORM\Column(name="uuid", type="uuid_binary", length=16, nullable="false")
+     * @ORM\Column(name="uuid", type="uuid_binary", length=16, nullable=false)
      */
     private $uuid;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="position_Ox", type="float", nullable="false")
+     * @ORM\Column(name="position_Ox", type="float", nullable=false)
      */
     private $positionOx;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="position_Oy", type="float", nullable="false")
+     * @ORM\Column(name="position_Oy", type="float", nullable=false)
      */
     private $positionOy;
 
@@ -61,7 +61,7 @@ class Beacon
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer", nullable="false")
+     * @ORM\Column(name="status", type="integer", nullable=false)
      */
     private $status = self::STATUS_ACTIVE;
 
