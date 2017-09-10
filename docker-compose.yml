@@ -9,8 +9,8 @@ services:
       - db
     environment:
       # Change to prod in production
-      - SYMFONY_ENV=dev
-      - SYMFONY_SECRET=ebb68f5c57dd588a770f93093253887e73ab02dd
+      - SYMFONY_ENV=${APP_ENV}
+      - SYMFONY_SECRET=${APP_SECRET}
     volumes:
       # Comment out the next line in production
       - ./:/srv/btracker-web:rw
@@ -27,16 +27,16 @@ services:
       context: ./docker/db
       dockerfile: ./Dockerfile
     environment:
-      - MYSQL_DATABASE=btracker
-      - MYSQL_PASSWORD=btracker
+      - MYSQL_DATABASE=${DATABASE_NAME}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
       - MYSQL_RANDOM_ROOT_PASSWORD=true
-      - MYSQL_USER=btracker
+      - MYSQL_USER=${DATABASE_USER}
     volumes:
       - db-data:/var/lib/mysql:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/mysql:rw
     ports:
-      - "13306:3306"
+      - "${DATABASE_PORT}:3306"
   nginx:
     build:
       context: ./docker/nginx
@@ -51,11 +51,11 @@ services:
     image: "rabbitmq:3.6-management"
     environment:
       RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-      RABBITMQ_DEFAULT_USER: "rabbitmq"
-      RABBITMQ_DEFAULT_PASS: "rabbitmq"
-      RABBITMQ_DEFAULT_VHOST: "/"
+      RABBITMQ_DEFAULT_USER: "${AMQP_USER}"
+      RABBITMQ_DEFAULT_PASS: "${AMQP_PASSWORD}"
+      RABBITMQ_DEFAULT_VHOST: "${AMQP_VHOST}"
     ports:
-      - "5672:5672"
+      - "${AMQP_PORT}:5672"
       - "15672:15672"
 
 volumes:

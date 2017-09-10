@@ -4,6 +4,11 @@ namespace AppBundle\Dto;
 
 class BeaconDto
 {
+    const UNKNOWN = 'unknown';
+    const IMMEDIATE = 'immediate';
+    const NEAR = 'near';
+    const FAR = 'far';
+
     /**
      * @var string
      */
@@ -25,6 +30,11 @@ class BeaconDto
     private $distance;
 
     /**
+     * @var string
+     */
+    private $zone;
+
+    /**
      * @return string
      */
     public function getName()
@@ -37,7 +47,7 @@ class BeaconDto
      *
      * @return BeaconDto
      */
-    public function setName($name)
+    public function setName(string $name): BeaconDto
     {
         $this->name = $name;
 
@@ -57,7 +67,7 @@ class BeaconDto
      *
      * @return BeaconDto
      */
-    public function setUuid($uuid)
+    public function setUuid(string $uuid): BeaconDto
     {
         $this->uuid = $uuid;
 
@@ -77,7 +87,7 @@ class BeaconDto
      *
      * @return BeaconDto
      */
-    public function setSignalStrength($signalStrength)
+    public function setSignalStrength(float $signalStrength): BeaconDto
     {
         $this->signalStrength = $signalStrength;
 
@@ -97,9 +107,29 @@ class BeaconDto
      *
      * @return BeaconDto
      */
-    public function setDistance($distance)
+    public function setDistance(float $distance): BeaconDto
     {
         $this->distance = $distance;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZone()
+    {
+        return $this->zone;
+    }
+
+    /**
+     * @param string $zone
+     *
+     * @return BeaconDto
+     */
+    public function setZone(string $zone): BeaconDto
+    {
+        $this->zone = $zone;
 
         return $this;
     }

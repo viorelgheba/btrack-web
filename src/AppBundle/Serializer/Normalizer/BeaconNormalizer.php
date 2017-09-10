@@ -36,8 +36,9 @@ class BeaconNormalizer implements DenormalizerInterface
 
         $object->setName($data['name'])
             ->setUuid($data['uuid'])
-            ->setSignalStrength($data['signal_strength'])
-            ->setDistance($data['distance']);
+            ->setSignalStrength((float)$data['signal_strength'])
+            ->setDistance((float)$data['distance'])
+            ->setZone($data['zone']);
 
         return $object;
     }
