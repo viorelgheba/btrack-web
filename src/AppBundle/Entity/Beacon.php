@@ -18,7 +18,7 @@ class Beacon
     /**
      * @var string
      *
-     * @ORM\Column(name="uuid", type="string", length=16, nullable=false)
+     * @ORM\Column(name="uuid", type="string", length=17, nullable=false)
      */
     private $uuid;
 
