@@ -31,7 +31,7 @@ class MonoLocalization extends AbstractLocalizationService
      */
     public function handleLocalization(EventDto $eventDto, $beacons)
     {
-        $this->generateNewEvent($eventDto, $beacons[0]);
+        $this->generateNewEvent($eventDto, $beacons[0], $beacons[0]->getPositionOx(), $beacons[0]->getPositionOy());
     }
 
     /**
