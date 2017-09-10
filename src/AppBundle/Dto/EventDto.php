@@ -15,6 +15,11 @@ class EventDto
     private $timestamp;
 
     /**
+     * @var int
+     */
+    private $clientId;
+
+    /**
      * @return BeaconDto[]
      */
     public function getBeacons()
@@ -64,5 +69,21 @@ class EventDto
         $this->timestamp = $timestamp;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClientId(): int
+    {
+        return $this->clientId;
+    }
+
+    /**
+     * @param int $clientId
+     */
+    public function setClientId(int $clientId)
+    {
+        $this->clientId = $clientId;
     }
 }

@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Dto\BeaconDto;
 use AppBundle\Dto\EventDto;
+use AppBundle\Entity\Event;
 use AppBundle\Service\Localization\LocalizationFactory;
 use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
@@ -34,11 +35,13 @@ class EventSaveService implements EventSaveInterface
      */
     public function saveEvent(EventDto $eventDto)
     {
+        return;
         if (empty($eventDto->getBeacons())) {
             return;
         }
 
         $beacons = $this->sortBeaconsByStrength($eventDto->getBeacons());
+        $eventDto->setBeacons($beacons);
 
         $localization = $this->localizationFactory->create($beacons);
         $localization->handleLocalization($beacons);

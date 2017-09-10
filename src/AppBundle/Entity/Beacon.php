@@ -21,6 +21,27 @@ class Beacon
     private $uuid;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="position_Ox", type="float", nullable="false")
+     */
+    private $positionOx;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="position_Oy", type="float", nullable="false")
+     */
+    private $positionOy;
+
+    /**
+     * @var Showroom
+     * @ORM\OneToMany(targetEntity="\Eis\AppBundle\Entity\Showroom", fetch="EXTRA_LAZY")
+     * @ORM\Column(name="showroom", referencedColumnName="id")
+     */
+    private $showroom;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
@@ -64,6 +85,60 @@ class Beacon
     public function setUuid($uuid)
     {
         $this->uuid = $uuid;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPositionOx(): float
+    {
+        return $this->positionOx;
+    }
+
+    /**
+     * @param float $positionOx
+     * @return Beacon
+     */
+    public function setPositionOx(float $positionOx): Beacon
+    {
+        $this->positionOx = $positionOx;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPositionOy(): float
+    {
+        return $this->positionOy;
+    }
+
+    /**
+     * @return Showroom
+     */
+    public function getShowroom(): Showroom
+    {
+        return $this->showroom;
+    }
+
+    /**
+     * @param Showroom $showroom
+     * @return Beacon
+     */
+    public function setShowroom(Showroom $showroom): Beacon
+    {
+        $this->showroom = $showroom;
+        return $this;
+    }
+
+    /**
+     * @param float $positionOy
+     * @return Beacon
+     */
+    public function setPositionOy(float $positionOy): Beacon
+    {
+        $this->positionOy = $positionOy;
+        return $this;
     }
 
     /**

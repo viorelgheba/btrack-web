@@ -3,6 +3,9 @@
 namespace AppBundle\Service\Localization;
 
 use AppBundle\Dto\BeaconDto;
+use AppBundle\Dto\EventDto;
+use AppBundle\Entity\Beacon;
+use AppBundle\Repository\BeaconRepository;
 
 class DualLocalization implements LocalizationInterface
 {
@@ -22,21 +25,21 @@ class DualLocalization implements LocalizationInterface
     /**
      * returns client location
      *
-     * @param BeaconDto[] $beacons
+     * @param EventDto[] $beacons
      * @return array
      */
     public function handleLocalization(array $beacons)
     {
         /** @var BeaconRepository $beaconRepository */
         $beaconRepository = $this->getDoctrine()->getRepository('AppBundle:Beacon');
-
+        /** @var Beacon $beacon */
         $beacon = $beaconRepository->findOneBy(
             array (
                 'uuid' => $beacons[0]->getUuid()
             )
         );
 
-        return $beacon->getLocation();
+        return array($beacon->getPositionOx(), $beacon->getPositionOy());
     }
 
     /**

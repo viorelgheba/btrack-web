@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS `beacon`;
 CREATE TABLE `beacon` (
     `id`       INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
     `uuid`     VARCHAR(255)     NOT NULL,
+    `position_Ox` FLOAT (3,2)   NOT NULL,
+    `position_Oy` FLOAT (3,2)   NOT NULL,
     `created`  TIMESTAMP        NULL     DEFAULT CURRENT_TIMESTAMP,
     `modified` TIMESTAMP        NULL     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `status`   TINYINT(1)       NOT NULL DEFAULT '1',
