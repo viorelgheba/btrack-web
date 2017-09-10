@@ -35,8 +35,8 @@ class HerokuConfig
         putenv(sprintf('DATABASE_HOST=%s', $config['host']));
         $io->write(sprintf('DATABASE_HOST=%s', $config['host']));
 
-        putenv(sprintf('DATABASE_PORT=%d', isset($config['port']) ? $config['port'] : 3306)));
-        $io->write(sprintf('DATABASE_PORT=%d', isset($config['port']) ? $config['port'] : 3306)));
+        putenv(sprintf('DATABASE_PORT=%d', isset($config['port']) ? $config['port'] : 3306));
+        $io->write(sprintf('DATABASE_PORT=%d', isset($config['port']) ? $config['port'] : 3306));
 
         putenv(sprintf('DATABASE_USER=%s', $config['user']));
         $io->write(sprintf('DATABASE_USER=%s', $config['user']));
