@@ -13,8 +13,11 @@ use Ramsey\Uuid\Uuid;
  */
 class Beacon
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
     /**
-     * @var string
+     * @var Uuid
      *
      * @ORM\Column(name="uuid", type="uuid_binary", length=16, nullable=false)
      */
@@ -37,7 +40,7 @@ class Beacon
     /**
      * @var Showroom
      *
-     * @ORM\OneToMany(targetEntity="\Eis\AppBundle\Entity\Showroom", fetch="EXTRA_LAZY")
+     * @ORM\ManyToOne(targetEntity="\Eis\AppBundle\Entity\Showroom", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="showroom", referencedColumnName="id")
      */
     private $showroom;
@@ -57,11 +60,11 @@ class Beacon
     private $modified = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="status", type="boolean", nullable=false)
+     * @ORM\Column(name="status", type="integer", nullable=false)
      */
-    private $status = '1';
+    private $status = self::STATUS_ACTIVE;
 
     /**
      * @var integer
@@ -73,17 +76,26 @@ class Beacon
     private $id;
 
     /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return Uuid
      */
-    public function getUuid()
+    public function getUuid(): Uuid
     {
         return $this->uuid;
     }
 
     /**
      * @param Uuid $uuid
+     * @return Beacon
      */
-    public function setUuid($uuid)
+    public function setUuid($uuid): Beacon
     {
         $this->uuid = $uuid;
     }
@@ -145,65 +157,61 @@ class Beacon
     /**
      * @return \DateTime
      */
-    public function getCreated()
+    public function getCreated(): \DateTime
     {
         return $this->created;
     }
 
     /**
      * @param \DateTime $created
+     *
+     * @return Beacon
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created): Beacon
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
      * @return \DateTime
      */
-    public function getModified()
+    public function getModified(): \DateTime
     {
         return $this->modified;
     }
 
     /**
      * @param \DateTime $modified
+     *
+     * @return Beacon
      */
-    public function setModified($modified)
+    public function setModified(\DateTime $modified): Beacon
     {
         $this->modified = $modified;
-    }
 
-    /**
-     * @return boolean
-     */
-    public function isStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param boolean $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getStatus(): int
     {
-        return $this->id;
+        return $this->status;
     }
 
     /**
-     * @param int $id
+     * @param int $status
+     *
+     * @return Beacon
      */
-    public function setId($id)
+    public function setStatus(int $status): Beacon
     {
-        $this->id = $id;
+        $this->status = $status;
+
+        return $this;
     }
 }
 
