@@ -48,14 +48,14 @@ class Beacon
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="modified", type="datetime", nullable=true)
      */
-    private $modified = 'CURRENT_TIMESTAMP';
+    private $modified;
 
     /**
      * @var int
@@ -74,6 +74,14 @@ class Beacon
     private $id;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getUuid()
@@ -83,63 +91,73 @@ class Beacon
 
     /**
      * @param string $uuid
+     *
+     * @return Beacon
      */
-    public function setUuid($uuid)
+    public function setUuid(string $uuid): Beacon
     {
         $this->uuid = $uuid;
+
+        return $this;
     }
 
     /**
      * @return float
      */
-    public function getPositionOx(): float
+    public function getPositionOx()
     {
         return $this->positionOx;
     }
 
     /**
      * @param float $positionOx
+     *
      * @return Beacon
      */
     public function setPositionOx(float $positionOx): Beacon
     {
         $this->positionOx = $positionOx;
+
         return $this;
     }
 
     /**
      * @return float
      */
-    public function getPositionOy(): float
+    public function getPositionOy()
     {
         return $this->positionOy;
     }
 
     /**
+     * @param float $positionOy
+     *
+     * @return Beacon
+     */
+    public function setPositionOy(float $positionOy): Beacon
+    {
+        $this->positionOy = $positionOy;
+
+        return $this;
+    }
+
+    /**
      * @return Showroom
      */
-    public function getShowroom(): Showroom
+    public function getShowroom()
     {
         return $this->showroom;
     }
 
     /**
      * @param Showroom $showroom
+     *
      * @return Beacon
      */
     public function setShowroom(Showroom $showroom): Beacon
     {
         $this->showroom = $showroom;
-        return $this;
-    }
 
-    /**
-     * @param float $positionOy
-     * @return Beacon
-     */
-    public function setPositionOy(float $positionOy): Beacon
-    {
-        $this->positionOy = $positionOy;
         return $this;
     }
 
@@ -153,10 +171,14 @@ class Beacon
 
     /**
      * @param \DateTime $created
+     *
+     * @return Beacon
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created): Beacon
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
@@ -169,42 +191,34 @@ class Beacon
 
     /**
      * @param \DateTime $modified
+     *
+     * @return Beacon
      */
-    public function setModified($modified)
+    public function setModified(\DateTime $modified): Beacon
     {
         $this->modified = $modified;
-    }
 
-    /**
-     * @return boolean
-     */
-    public function isStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param boolean $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getStatus()
     {
-        return $this->id;
+        return $this->status;
     }
 
     /**
-     * @param int $id
+     * @param int $status
+     *
+     * @return Beacon
      */
-    public function setId($id)
+    public function setStatus(int $status): Beacon
     {
-        $this->id = $id;
+        $this->status = $status;
+
+        return $this;
     }
 }
 

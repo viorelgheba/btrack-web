@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * Event
  *
  * @ORM\Table(name="event")
- * @ORM\Entity(repositoryClass="")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event
 {
@@ -60,14 +61,14 @@ class Event
      *
      * @ORM\Column(name="created", type="datetime", nullable=false)
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="modified", type="datetime", nullable=false)
      */
-    private $modified = 'CURRENT_TIMESTAMP';
+    private $modified;
 
     /**
      * @var int
@@ -222,6 +223,20 @@ class Event
         $this->status = $status;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if (null === $this->created) {
+            $this->setCreated(new \DateTime('now'));
+        }
+
+        if (null === $this->modified) {
+            $this->setModified(new \DateTime('now'));
+        }
     }
 }
 

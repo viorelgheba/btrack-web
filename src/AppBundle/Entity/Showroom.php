@@ -27,14 +27,14 @@ class Showroom
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
-    private $created = 'CURRENT_TIMESTAMP';
+    private $created;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="modified", type="datetime", nullable=true)
      */
-    private $modified = 'CURRENT_TIMESTAMP';
+    private $modified;
 
     /**
      * @var int
@@ -53,6 +53,14 @@ class Showroom
     private $id;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -62,10 +70,14 @@ class Showroom
 
     /**
      * @param string $name
+     *
+     * @return Showroom
      */
-    public function setName($name)
+    public function setName(string $name): Showroom
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -78,10 +90,14 @@ class Showroom
 
     /**
      * @param \DateTime $created
+     *
+     * @return Showroom
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created): Showroom
     {
         $this->created = $created;
+
+        return $this;
     }
 
     /**
@@ -94,42 +110,34 @@ class Showroom
 
     /**
      * @param \DateTime $modified
+     *
+     * @return Showroom
      */
-    public function setModified($modified)
+    public function setModified(\DateTime $modified): Showroom
     {
         $this->modified = $modified;
-    }
 
-    /**
-     * @return boolean
-     */
-    public function isStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param boolean $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getStatus()
     {
-        return $this->id;
+        return $this->status;
     }
 
     /**
-     * @param int $id
+     * @param int $status
+     *
+     * @return Showroom
      */
-    public function setId($id)
+    public function setStatus(int $status): Showroom
     {
-        $this->id = $id;
+        $this->status = $status;
+
+        return $this;
     }
 }
 
