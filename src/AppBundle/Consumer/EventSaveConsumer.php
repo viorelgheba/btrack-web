@@ -58,7 +58,7 @@ class EventSaveConsumer implements ConsumerInterface
             return self::MSG_REJECT;
         }
 
-        $this->logger->warning('dto', print_r($eventDto, true));
+        $this->logger->warning(print_r($eventDto, true));
 
         try {
             $this->eventSaveService->saveEvent($eventDto);
