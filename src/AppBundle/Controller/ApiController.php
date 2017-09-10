@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiController extends Controller
 {
     /**
-     * @Route("/api/event", methods={"POST"})
+     * @Route("/api/event", name="api_event_save", methods={"POST"})
      *
      * @var Request $request
      * @return Response
@@ -26,15 +26,5 @@ class ApiController extends Controller
         $rabbitMqPublisher->publish('event.save', $request->getContent());
 
         return Response::create();
-    }
-
-    /**
-     * @Route("/api/params", methods={"GET"})
-     *
-     * @return JsonResponse
-     */
-    public function parametersAction()
-    {
-        return JsonResponse::create($this->get('service_container')->getParameterBag()->all());
     }
 }
