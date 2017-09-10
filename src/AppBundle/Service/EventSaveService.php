@@ -78,11 +78,11 @@ class EventSaveService implements EventSaveInterface
             usort(
                 $eventDto->getBeacons(),
                 function (BeaconDto $beaconDto1, BeaconDto $beaconDto2) {
-                    if ($beaconDto1->getSignalStrength() == $beaconDto2->getSignalStrength()) {
+                    if (abs($beaconDto1->getSignalStrength()) == abs($beaconDto2->getSignalStrength())) {
                         return 0;
                     }
 
-                    return ($beaconDto1->getSignalStrength() > $beaconDto2->getSignalStrength()) ? -1 : 1;
+                    return (abs($beaconDto1->getSignalStrength()) < abs($beaconDto2->getSignalStrength())) ? -1 : 1;
                 }
             );
         }
