@@ -8,6 +8,7 @@ use AppBundle\Entity\Event;
 use AppBundle\Repository\CustomerRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
+use Psr\Log\LoggerInterface;
 
 abstract class AbstractLocalizationService implements LocalizationInterface
 {
@@ -15,6 +16,11 @@ abstract class AbstractLocalizationService implements LocalizationInterface
      * @var Registry
      */
     protected $doctrine;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * @param EventDto   $eventDto
@@ -36,6 +42,8 @@ abstract class AbstractLocalizationService implements LocalizationInterface
             ->setPositionOy(null === $y ? $beacon->getPositionOy() : $y);
 
         $em->persist($event);
+
+        $this->logger->info("Coordinates: X:" . $x . "  Y:" . $y);
     }
 
     /**
@@ -45,5 +53,13 @@ abstract class AbstractLocalizationService implements LocalizationInterface
     public function setDoctrine($doctrine)
     {
         $this->doctrine = $doctrine;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }

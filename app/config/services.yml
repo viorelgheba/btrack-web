@@ -45,6 +45,7 @@ services:
         abstract: true
         calls:
             - [ setDoctrine, [ "@doctrine" ] ]
+            - [ setLogger, [ "@logger" ] ]
 
     app_localization_mono:
         class: AppBundle\Service\Localization\MonoLocalization
